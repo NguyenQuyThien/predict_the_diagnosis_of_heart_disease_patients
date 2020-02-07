@@ -1,0 +1,32 @@
+  
+  <head>
+    
+    <title>Login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <!-- căn Vertical center -->
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col6" style="text-align: center;">
+        
+        <h1>Please login</h1>
+        <br>
+        <form action="" method="post">
+          <input type="text" placeholder="Username" name="username" value="{{
+            request.form.username }}" style="margin-bottom: 8px;">
+          <br>
+          <input type="password" placeholder="Password" name="password" value="{{
+            request.form.password }}"  style="margin-bottom: 16px;">
+          <br>
+          <input class="btn btn-warning" type="submit" value="Login">
+        </form>
+        {% if error %}
+          <p class="alert alert-danger" role="alert"><strong>Error:</strong> {{ error }}</p>
+        {% endif %}
+        
+        </div>
+      </div>
+    </div>
+  </body>

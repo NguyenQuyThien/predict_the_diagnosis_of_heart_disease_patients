@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete record</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<!-- căn Vertical center -->
+	<div class="container h-100">
+		<div class="row h-100 justify-content-center align-items-center">
+			<div class="col" style="text-align: center;">
+				
+				<div class=page>
+					<h3>Danh sách các bản ghi mới</h3>
+					<!-- <ul class=list-group> -->
+						{% if records is defined %}
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th scope="col">ID</th> 
+										<th scope="col">Age</th> 
+										<th scope="col">Sex</th> 
+										<th scope="col">Cp</th> 
+										<th scope="col">Trestbps</th> 
+										<th scope="col">Chol</th> 
+										<th scope="col">Fbs</th> 
+										<th scope="col">Restecg</th> 
+										<th scope="col">Thalach</th> 
+										<th scope="col">Exang</th>
+										<th scope="col">Oldpeak</th>
+										<th scope="col">Slope</th> 
+										<th scope="col">Ca</th> 
+										<th scope="col">Thal</th>
+										<th scope="col">Target</th>
+										<th scope="col"><i>Option</i></th>
+									</tr>
+								</thead>
+								<tbody>
+						{% for record in records %}
+						<!-- <li class="list-group-item list-group-item-warning"> -->
+							<!-- <h3>ID: {{record.ID}} | Age: {{record.Age}} | Sex: {{record.Sex}} | Cp: {{record.Cp}} | Trestbps: {{record.Trestbps}} | Chol: {{record.Chol}} | Fbs: {{record.Fbs}} | Restecg: {{record.Restecg}} | Thalach: {{record.Thalach}} | Exang: {{record.Exang}} | Oldpeak: {{record.Oldpeak}} | Slope: {{record.Slope}} | Ca: {{record.Ca}} | Thal: {{record.Thal}} | Target: {{record.Target}}</h3> -->
+									<tr>
+										<th scope="row">{{record.ID}}</th>
+										<td>{{record.Age}}</td>
+										<td>{{record.Sex}}</td>
+										<td>{{record.Cp}}</td>
+										<td>{{record.Trestbps}}</td>
+										<td>{{record.Chol}}</td>
+										<td>{{record.Fbs}}</td>
+										<td>{{record.Restecg}}</td>
+										<td>{{record.Thalach}}</td>
+										<td>{{record.Exang}}</td>
+										<td>{{record.Oldpeak}}</td>
+										<td>{{record.Slope}}</td>
+										<td>{{record.Ca}}</td>
+										<td>{{record.Thal}}</td>
+										<td>{{record.Target}}</td>
+										<td><form action="{{ url_for('delete_record') }}" method=post class=delete-record onsubmit="return confirm('Do you really want to delete this record (ID: {{record.ID}} | Age: {{record.Age}} | Sex: {{record.Sex}} | Cp: {{record.Cp}} | Trestbps: {{record.Trestbps}} | Chol: {{record.Chol}} | Fbs: {{record.Fbs}} | Restecg: {{record.Restecg}} | Thalach: {{record.Thalach}} | Exang: {{record.Exang}} | Oldpeak: {{record.Oldpeak}} | Slope: {{record.Slope}} | Ca: {{record.Ca}} | Thal: {{record.Thal}} | Target: {{record.Target}})?');">
+											<input type=hidden value="{{ record.ID }}"name=record_ID_to_delete />
+											<input type=submit value="Delete" class="btn btn-danger"/>
+											</form>
+										</td>
+								</tr>
+
+
+						<!-- </li> -->
+						{% endfor %}
+							</tbody>
+						</table>
+						{% else %}
+						<!-- </ul> -->
+					</div>
+					<p class="alert alert-danger" role="alert"><strong>Records is empty list in database</strong></p>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>	
+	</body>
+
+	</html>
+

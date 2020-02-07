@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+	<meta charset="UTF-8">
+	<title>Demo</title>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+	<link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+	<h1 align="center" style="color: black ">Ứng dụng hỗ trợ chuẩn đoán bệnh tim</h1>
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<!-- Main Input For Receiving Query to our ML -->
+			<form action="{{ url_for('predict')}}"method="post">
+
+				<table class="table table-hover table-bordered">		  
+					<tbody>
+						<tr>
+							<th scope="row" title="Tuổi">Age</th>
+							<td><input type="number" name="age" min="1" max="100" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="1 = Nam; 0 = Nữ">Sex</th>
+							<td><input type="number" name="sex" min="0" max="1" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Độ đau thắt ngực (từ 1-4)">Cp</th>
+							<td><input type="number" name="cp" min="1" max="4" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Huyết áp khi nghỉ ngơi">Tretbps</th>
+							<td><input type="number" name="tretbps" min="80" max="200" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Lượng Cholesterol trong máu">Chol</th>
+							<td><input type="number" name="chol" min="85" max="603" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Lượng đường huyết lúc đói > 120 mg/dl (1 mg/dl = 0.01 kg/m3)">Fbs</th>
+							<td><input type="number" name="fbs" min="0" max="1" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Kết quả điện tâm đồ khi nghỉ ngơi (giá trị 0,1,2)">Restecg</th>
+							<td><input type="number" name="restecg" min="0" max="2" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Nhịp tim tối đa đạt được">Thalack</th>
+							<td><input type="number" name="thalack" min="60" max="202" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Tập thể dục gây đau thắt ngực">Exang</th>
+							<td><input type="number" name="exang" min="0" max="1" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Nơi đoạn ST thấp bất thường (ở dưới đường cơ sở) trên điện tâm đồ">Oldpeak</th>
+							<td><input type="number" name="oldpeak" min="-2.6" max="6.2" step="0.1" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Độ dốc của đoạn ST có đỉnh cao nhất khi tập thể dục trên điện tâm đồ (1: đi lên dốc, 2: đi ngang, 3: đi xuống dốc)">Slope</th>
+							<td><input type="number" name="slope" min="0" max="3" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="Số mạch máu chính (0-3) được tô màu khi nội soi">Ca</th>
+							<td><input type="number" name="ca" min="0" max="3" required="required"></td>
+						</tr>
+						<tr>
+							<th scope="row" title="3 = bình thường; 6 = khuyết tật cố định; 7 = khuyết tật có thể đảo ngược">Thal</th>
+							<td><input type="number" name="thal" min="1" max="7" required="required"></td>
+						</tr>
+
+					</tbody>
+				</table>
+
+				<button type="submit" class="btn btn-primary btn-block btn-large" style="color: black">Chuẩn Đoán</button>
+			</form>
+
+			<br>
+			<br>
+			{{ prediction_text }}
+
+		</div>
+	</div>
+</body>
+</html>
